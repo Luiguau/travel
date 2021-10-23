@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Travel Dashboard{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% include "navbar.html" %}
+		<div class="pt-5">
+			<h5>Your Trip Schedules</h5>
+			<table class="table table-striped table-success table-bordered" id="trip">
+				<thead>
+					<tr class="bg-success">
+						<th scope="col">Destination</th>
+						<th scope="col">Travel Start Date</th>
+						<th scope="col">Travel End Date</th>
+						<th scope="col">Plan</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for trip in my_trips %}
+					<tr>
+						<td><a href="destination/{{trip.id}}">{{ trip.destination }}</a></td>
+						<td>{{ trip.start_date }}</td>
+						<td>{{ trip.end_date }}</td>
+						<td>{{ trip.description }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="pt-5">
+			<h5>Other User's Travel Plans</h5>
+			<table class="table table-striped table-success table-bordered" id="other">
+				<thead>
+					<tr class="bg-success">
+						<th scope="col">Name</th>
+						<th scope="col">Destination</th>
+						<th scope="col">Travel Start Date</th>
+						<th scope="col">Travel End Date</th>
+						<th scope="col">Do You Want To Join?</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for trip in other_trips %}
+					<tr>
+						<td>{{ trip.creator.name }}</td>
+						<td><a href="destination/{{trip.id}}">{{ trip.destination }}</a></td>
+						<td>{{ trip.start_date }}</td>
+						<td>{{ trip.end_date}}</td>
+						<td>
+							<form action="{% url 'join' %}" method="POST">
+								{% csrf_token %}
+								<input type="hidden" name="trip_id" value="{{ trip.id }}">
+								<input class="bg-transparent border-0 text-primary" type="submit" value="Join">
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#trip').DataTable( {
+				"order": [[ 1, "desc" ]]
+			} );
+			$('#other').DataTable( {
+				"order": [[ 0, "asc" ]]
+			} );
+		} );
+	</script>
+{% endblock %}

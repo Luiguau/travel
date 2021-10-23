@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Plan{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% include "navbar.html" %}
+		<br>
+		<div class="row justify-content-around">
+			<div class="col-6">
+				<form action="add_trip" method="POST">
+					{% csrf_token %}
+					<fieldset>
+					<legend>Add a Trip</legend>
+					<div class="mb-3 row">
+						<label for="dest" class="col-sm-3 col-form-label">Destination:</label>
+						<div class="col-sm-9"><input type="text" class="form-control" name="dest" id="dest"></div>
+							{% if messages %}
+								{% for message in messages %}
+									{% if message.extra_tags == 'dest' %}
+										<div class="register alert {{ message.tags }} alert-dismissible" role="alert">{{message}}</div>
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+					</div>
+					<div class="mb-3 row">
+						<label for="descript" class="col-sm-3 col-form-label">Description:</label>
+						<div class="col-sm-9"><input type="text" class="form-control" name="descript" id="descript"></div>
+							{% if messages %}
+								{% for message in messages %}
+									{% if message.extra_tags == 'descript' %}
+										<div class="register alert {{ message.tags }} alert-dismissible" role="alert">{{message}}</div>
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+					</div>
+					<div class="mb-3 row">
+						<label for="dfrom" class="col-sm-4 col-form-label">Travel Date From:</label>
+						<div class="col-sm-8"><input type="date" class="form-control" name="dfrom" id="dfrom"></div>
+							{% if messages %}
+								{% for message in messages %}
+									{% if message.extra_tags == 'dfrom' %}
+										<div class="register alert {{ message.tags }} alert-dismissible" role="alert">{{message}}</div>
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+					</div>
+					<div class="mb-3 row">
+						<label for="dto" class="col-sm-4 col-form-label">Travel Date To:</label>
+						<div class="col-sm-8"><input type="date" class="form-control" name="dto" id="dto"></div>
+							{% if messages %}
+								{% for message in messages %}
+									{% if message.extra_tags == 'dto' %}
+										<div class="register alert {{ message.tags }} alert-dismissible" role="alert">{{message}}</div>
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+					</div>
+					<div class="col text-right">
+						<button class="btn btn-outline-success shadow">Add</button>
+					</div>
+					<br>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

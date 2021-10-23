@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Change Password{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% include "navbar.html" %}
+		<br>
+		<div class="row justify-content-around">
+			<div class="col-5">
+				<form method="post" action="/cambiar_pass">
+					{% csrf_token %}
+					<fieldset>
+						<legend>Change Password</legend>
+						{% if messages %}
+							{% for message in messages %}
+								{% if message.tags == 'alert-success' %}
+									<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+										{{message}}<br>
+										<script>
+											setTimeout("location.href='/'",3000)
+										</script>
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+						
+						<label for="actPass">Current Password:</label>
+						<input type="password" class="form-control" id='actPass' name="actPass">
+						{% if messages %}
+							{% for message in messages %}
+								{% if message.extra_tags == 'login' %}
+									<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+										{{message}}
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+						<br>
+						<label for="newPass">New Password:</label>
+						<input type="password" class="form-control" id='newPass' name="newPass">
+						{% if messages %}
+							{% for message in messages %}
+								{% if message.extra_tags == 'newPass' %}
+									<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+										{{message}}
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+						<br>
+						<label for="confPass">Confirm Password:</label>
+						<input type="password" class="form-control" id='confPass' name="confPass">
+						{% if messages %}
+							{% for message in messages %}
+								{% if message.extra_tags == 'confPass' %}
+									<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+										{{message}}
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+						<br>
+						<div class="col text-right">
+							<button type="submit" class="btn btn-success">Cambiar</button>
+						</div>
+						<br>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock %}

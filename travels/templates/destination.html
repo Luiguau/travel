@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Destination{% endblock %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		{% include "navbar.html" %}
+		<br>
+		<div class="card border-success mb-3" style="max-width: 30rem;">
+					{% comment %} <a href="destination/{{trip.id}}"></a></td>
+					<td>{{ trip.start_date }}</td>
+					<td>{{ trip.end_date }}</td>
+					<td>{{ trip.description }}</td> {% endcomment %}
+			<div class="card-header bg-success text-white h3">{{ trip.destination }}</div>
+			<div class="card-body text-success">
+				<ul class="card-text" style="list-style: none;">
+					<li>Planed By: {{ trip.creator.name }}</li>
+					<li>Description: {{ trip.description }}</li>
+					<li>Travel Date From: {{ trip.start_date }}</li>
+					<li>Travel Date To: {{ trip.end_date }}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="card border-success mb-3" style="max-width: 30rem;">
+			<div class="card-header bg-success text-white h5">Other user's joining the trip</div>
+			<div class="card-body text-success">
+				<ul class="card-text" style="list-style: none;">
+					{% for user in trip.joined_user.all %}
+					<li>{{ user.name }} </li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+fieldset {
+	border: 1px solid green;
+	padding: 0.2em 0.5em;
+}
+
+legend {
+	padding: 0.2em 0.5em;
+	border: 1px solid green;
+	color: green;
+	font-size: 90%;
+	text-align: left;
+	width: auto;
+	font-weight: bold;
+}
+
+.alert{
+	padding: 0.2em 0.5em;
+	font-size: 90%;
+	width: 93%;
+}
+
+.register{
+	margin: 0 1em 0 1em;
+}
+
+.login{
+	width: 100%;
+}
+
+.navbar_bg{
+	background-color: #86e586;
+}
